@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_room__app_room__app,room__app.room__app,model_room__app_room__app,base.group_user,1,1,1,1
+access_room_availability,room__app.room_availability,model_room__app_room_availability,base.group_user,1,1,1,1

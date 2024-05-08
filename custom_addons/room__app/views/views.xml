@@ -1,0 +1,87 @@
+<odoo>
+  <data>
+    <record id="room_app_list_view" model="ir.ui.view">
+        <field name="name">Room_App list</field>
+        <field name="model">room__app.room__app</field>
+        <field name="arch" type="xml">
+            <tree string="Room List">
+                <field name="status"/>
+                <field name="name"/>
+                <field name="short_name"/>
+                <field name="room_type"/>
+                <field name="main_places"/>
+                <field name="additional_places"/>
+
+                <button name="action_copy_room" type="object" string="Duplicate" confirm="Are you sure you want to duplicate this room?" icon="fa-copy"/>
+                <button name="action_edit_room" type="object" string="Edit" icon="fa-edit"/>
+                <button name="action_delete_room" type="object" string="Delete" icon="fa-trash-o" confirm="Are you sure you want to delete this room?"/>
+                <button name="action_copy_room_link" type="object" string="Copy Room Link" icon="fa-link" confirm="Are you sure you want to copy the room link?"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_room_availability_form" model="ir.ui.view">
+        <field name="name">room.availability.form</field>
+        <field name="model">room__app.room_availability</field>
+        <field name="arch" type="xml">
+            <form string="Room Availability">
+                <group>
+                    <field name="room_id"/>
+                    <field name="date"/>
+                    <field name="is_available"/>
+                    <field name="notes"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="room__app.action_window">
+        <field name="name">Room_App Window</field>
+        <field name="res_model">room__app.room__app</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="room__app.action_server">
+      <field name="name">Room_App server</field>
+      <field name="model_id" ref="model_room__app_room__app"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_room_availability_form">
+        <field name="name">Room Availability</field>
+        <field name="res_model">room__app.room_availability</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_room_availability_tree">
+        <field name="name">Room Availabilities</field>
+        <field name="res_model">room__app.room_availability</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem name="Room_App" id="room__app.menu_root"/>
+
+    <menuitem name="Rooms" id="room__app.menu_1" parent="room__app.menu_root"/>
+    <menuitem name="Server List" id="room__app.menu_2" parent="room__app.menu_root"/>
+
+    <menuitem name="List" id="room__app.menu_1_list" parent="room__app.menu_1" action="room__app.action_window"/>
+    <menuitem name="Server to list" id="room__app_server" parent="room__app.menu_2" action="room__app.action_server"/>
+
+    <menuitem id="menu_root" name="Room App" sequence="10"/>
+
+    <menuitem id="menu_room_availability" name="Room Availability" parent="menu_root" sequence="20"
+              action="action_room_availability_form"/>
+
+    <menuitem id="menu_room_availability_list" name="Room Availabilities" parent="menu_root" sequence="21"
+              action="action_room_availability_tree"/>
+  </data>
+</odoo>

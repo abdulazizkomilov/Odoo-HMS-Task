@@ -25,12 +25,14 @@
         <field name="model">room__app.room_availability</field>
         <field name="arch" type="xml">
             <form string="Room Availability">
-                <group>
-                    <field name="room_id"/>
-                    <field name="date"/>
-                    <field name="is_available"/>
-                    <field name="notes"/>
-                </group>
+                <sheet>
+                    <group>
+                        <field name="room_id"/>
+                        <field name="date"/>
+                        <field name="is_available"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
